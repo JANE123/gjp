@@ -1,5 +1,12 @@
 package cn.itcast.gjp.domain;
 
+
+/**
+ * entity实体类
+ * tips 主要声明一些对象属性，构造函数，
+ * 建议以后使用lombok插件，隐藏get、set、toString等，简化代码，
+ * lombok插件会在代码启动之前自动添加get、set、toString等
+ */
 public class ZhangWu {
 	 private int  zwid;
 	  
