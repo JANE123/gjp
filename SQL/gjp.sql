@@ -7,6 +7,20 @@ CREATE DATABASE gjp;
 USE gjp;
 
 /*
+    tips:
+    主键 zwid 1.改为VARCHAR(64)，这边的数值型其实也可以，但是以后删除用户后数字会在数据库有明显的断开，但是改为字符串可以将主键生成唯一主键保存至数据库
+                2. NOT NULL主键强制非空，这涉及如果业务层保存至数据库的操作的时候，id空直接报错
+                3. 添加注释 COMMENT 如zwid INT PRIMARY KEY AUTO_INCREMENT NOT NULL COMMENT '主键id',
+    分类名称 flname 添加comment注释
+    金额 money 1. 建议改为decimal，精度更高
+                2. 添加comment注释
+    账户 zhanghu 添加comment注释
+    创建日期 createtime 1. 建议改为时间戳timestamp类型
+                        2. 添加comment注释
+    账务描述 description 添加comment注释
+ */
+
+/*
   创建数据表,表名账务
   字段,列
   主键

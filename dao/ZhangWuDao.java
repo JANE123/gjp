@@ -1,7 +1,11 @@
 package cn.itcast.gjp.dao;
 /*
- *  ÊµÏÖ¶ÔÊý¾Ý±í gjp_zhangwu Êý¾ÝÔöÉ¾¸Ä²é²Ù×÷
- *  dbuils¹¤¾ßÀàÍê³É,Àà³ÉÔ±´´½¨QueryRunner¶ÔÏó,Ö¸¶¨Êý¾ÝÔ´
+ *  Êµï¿½Ö¶ï¿½ï¿½ï¿½ï¿½Ý±ï¿½ gjp_zhangwu ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½Ä²ï¿½ï¿½ï¿½ï¿½
+ *  dbuilsï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½QueryRunnerï¿½ï¿½ï¿½ï¿½,Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´
+ */
+/**
+ * æ•°æ®è®¿é—®å¯¹è±¡ï¼Œä¸€æ–¹é¢è¿žæŽ¥è¯•é¢˜å¯¹è±¡ï¼Œä¸€æ–¹é¢è¿žæŽ¥æ•°æ®åº“æ“ä½œï¼ˆè¿™è¾¹ç”¨åŽŸç”ŸSQLæ²¡ä»€ä¹ˆé—®é¢˜ï¼‰
+ * tipsï¼š å»ºè®®ç”¨æ¡†æž¶ï¼Œè¿™äº›ç®€å•çš„CRUDæ“ä½œç›´æŽ¥ç”¨å°±å¯ä»¥äº†ï¼Œmybatisé‡Œçš„insertä¹‹ç±»ï¼Œjpaä¸­ä¹Ÿæ˜¯ç±»ä¼¼çš„
  */
 
 import java.sql.SQLException;
@@ -16,91 +20,91 @@ import cn.itcast.gjp.tools.JDBCUtils;
 public class ZhangWuDao {
 	private QueryRunner qr = new QueryRunner(JDBCUtils.getDataSource());
 	/*
-	 * ¶¨Òå·½·¨£¬ÊµÏÖÉ¾³ýÒµÎñ
-	 * ÒµÎñ²ãµ÷ÓÃ£¬´«µÝÖ÷¼üid
+	 * ï¿½ï¿½ï¿½å·½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½É¾ï¿½ï¿½Òµï¿½ï¿½
+	 * Òµï¿½ï¿½ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½id
 	 */
 	public void deleteZhangWu(int zwid) {
 		try {
-			//Æ´Ð´É¾³ýÊý¾ÝSQL
+			//Æ´Ð´É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½SQL
 			String sql = "DELETE FROM gjp_zhangwu WHERE zwid=?";
 			qr.update(sql, zwid);
 		} catch (SQLException ex) {
 			System.out.println(ex);
-			throw new RuntimeException("É¾³ýÕËÎñÊ§°Ü");
+			throw new RuntimeException("É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
 		}
 	}
 	/*
-	 * ¶¨Òå·½·¨£¬ÊµÏÖ±à¼­¹¦ÄÜ
-	 * ÓÉÒµÎñ²ãµ÷ÓÃ£¬´«µÝZhangWu¶ÔÏó
-	 * ½«¶ÔÏóÖÐµÄÊý¾Ý£¬¸üÐÂµ½Êý¾Ý±í
+	 * ï¿½ï¿½ï¿½å·½ï¿½ï¿½ï¿½ï¿½Êµï¿½Ö±à¼­ï¿½ï¿½ï¿½ï¿½
+	 * ï¿½ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ZhangWuï¿½ï¿½ï¿½ï¿½
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½ï¿½Âµï¿½ï¿½ï¿½ï¿½Ý±ï¿½
 	 */
 	public void editZhangWu(ZhangWu zw) {
 		try {
-			//¸üÐÂÊý¾ÝµÄSQL
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ýµï¿½SQL
 			String sql = "UPDATE gjp_zhangwu SET flname=?,money=?,zhanghu=?,createtime=?,description=? WHERE zwid=?";
-			//¶¨Òå¶ÔÏóÊý×é£¬·â×°ËùÓÐÊý¾Ý
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é£¬ï¿½ï¿½×°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			Object[] params = {zw.getFlname(),zw.getMoney(),zw.getZhanghu(),zw.getCreatetime(),zw.getDescription(),zw.getZwid()};
-			//µ÷ÓÃqr¶ÔÏó·½·¨updateÖ´ÐÐ¸üÐÂ
+			//ï¿½ï¿½ï¿½ï¿½qrï¿½ï¿½ï¿½ó·½·ï¿½updateÖ´ï¿½Ð¸ï¿½ï¿½ï¿½
 			qr.update(sql, params);
 		} catch (SQLException ex) {
 			System.out.println(ex);
-			throw new RuntimeException("±à¼­ÕËÎñÊ§°Ü");
+			throw new RuntimeException("ï¿½à¼­ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
 		}
 		
 	}
 	/*
-	 * ¶¨Òå·½·¨£¬ÊµÏÖÌí¼ÓÕËÎñ¹¦ÄÜ
-	 * ÓÉÒµÎñ²ãµ÷ÓÃ£¬´«µÝZhangWu¶ÔÏó
-	 * ½«ZhangWu¶ÔÏóÖÐµÄÊý¾Ý£¬Ìí¼Óµ½Êý¾Ý¿â
+	 * ï¿½ï¿½ï¿½å·½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * ï¿½ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ZhangWuï¿½ï¿½ï¿½ï¿½
+	 * ï¿½ï¿½ZhangWuï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½Ý¿ï¿½
 	 */
 	public void addZhangWu(ZhangWu zw) {
 		try{
-			 //Æ´½ÓÌí¼ÓÊý¾ÝµÄsql
+			 //Æ´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ýµï¿½sql
 			String sql = "INSERT INTO gjp_zhangwu (flname,money,zhanghu,createtime,description) VALUES(?,?,?,?,?)";
-			//´´½¨¶ÔÏóÊý×é£¬´¦´¦5¸öÕ¼Î»·ûµÄÊµ¼Ê²ÎÊý
-			//Êµ¼Ê²ÎÊýÀ´Ô´ÊÇ´«µÝ¹ýÀ´µÄ¶ÔÏóZhangWu
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é£¬ï¿½ï¿½ï¿½ï¿½5ï¿½ï¿½Õ¼Î»ï¿½ï¿½ï¿½ï¿½Êµï¿½Ê²ï¿½ï¿½ï¿½
+			//Êµï¿½Ê²ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½Ç´ï¿½ï¿½Ý¹ï¿½ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½ZhangWu
 			Object[] params = {zw.getFlname(),zw.getMoney(),zw.getZhanghu(),zw.getCreatetime(),zw.getDescription()};
-			//µ÷ÓÃqr¶ÔÏóÖÐµÄ·½·¨updateÖ´ÐÐÌí¼Ó
+			//ï¿½ï¿½ï¿½ï¿½qrï¿½ï¿½ï¿½ï¿½ï¿½ÐµÄ·ï¿½ï¿½ï¿½updateÖ´ï¿½ï¿½ï¿½ï¿½ï¿½
 			qr.update(sql, params);
 		}catch(SQLException ex) {
 			System.out.println(ex);
-			throw new RuntimeException("ÕËÎñÌí¼ÓÊ§°Ü");
+			throw new RuntimeException("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
 		}
 	}
 	/*
-	 * ¶¨Òå·½·¨,²éÑ¯Êý¾Ý¿â,´øÓÐÌõ¼þÈ¥²éÑ¯ÕËÎñ±í
-	 * ÓÉÒµÎñ²ãµ÷ÓÃ,²éÑ¯½á¹û¼¯´æ´¢µ½Bean¶ÔÏó,´æ´¢µ½List¼¯ºÏ
-	 * µ÷ÓÃÕß´«µÝ2¸öÈÕÆÚ×Ö·û´®
+	 * ï¿½ï¿½ï¿½å·½ï¿½ï¿½,ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½Ý¿ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¥ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * ï¿½ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ´¢ï¿½ï¿½Beanï¿½ï¿½ï¿½ï¿½,ï¿½æ´¢ï¿½ï¿½Listï¿½ï¿½ï¿½ï¿½
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ß´ï¿½ï¿½ï¿½2ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
 	 */
 	public List<ZhangWu> select(String startDate,String endDate){
 		try{
-			//Æ´Ð´Ìõ¼þ²éÑ¯µÄSQLÓï¾ä
+			//Æ´Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½SQLï¿½ï¿½ï¿½
 			String sql = "SELECT * FROM gjp_zhangwu WHERE createtime BETWEEN ? AND ?";
-			//¶¨Òå¶ÔÏóÊý×é,´æ´¢?Õ¼Î»·û
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½æ´¢?Õ¼Î»ï¿½ï¿½
 			Object[] params = {startDate,endDate};
-			//µ÷ÓÃqr¶ÔÏóµÄ·½·¨query²éÑ¯Êý¾Ý±í,»ñÈ¡½á¹û¼¯
+			//ï¿½ï¿½ï¿½ï¿½qrï¿½ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½queryï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½Ý±ï¿½,ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½
 			return qr.query(sql, new BeanListHandler<>(ZhangWu.class),params);
 		}catch(SQLException ex){
 			System.out.println(ex);
-			throw new RuntimeException("Ìõ¼þ²éÑ¯Ê§°Ü");
+			throw new RuntimeException("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¯Ê§ï¿½ï¿½");
 		}
 	}
 	
 	/*
-	 * ¶¨Òå·½·¨,²éÑ¯Êý¾Ý¿â,»ñÈ¡ËùÓÐµÄÕËÎñÊý¾Ý
-	 * ·½·¨,ÓÉÒµÎñ²ãµ÷ÓÃ
-	 * ½á¹û¼¯,½«ËùÓÐµÄÕËÎñÊý¾Ý,´æ´¢µ½Bean¶ÔÏóÖÐ,´æ´¢µ½¼¯ºÏÖÐ
+	 * ï¿½ï¿½ï¿½å·½ï¿½ï¿½,ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½Ý¿ï¿½,ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½æ´¢ï¿½ï¿½Beanï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½æ´¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public List<ZhangWu> selectAll(){
 		try{
-		//²éÑ¯ÕËÎñÊý¾ÝµÄSQLÓï¾ä
+		//ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ýµï¿½SQLï¿½ï¿½ï¿½
 			String sql = "SELECT * FROM gjp_zhangwu";
-			//µ÷ÓÃqr¶ÔÏóµÄ·½·¨,query·½·¨,½á¹û¼¯BeanListHandler
+			//ï¿½ï¿½ï¿½ï¿½qrï¿½ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½,queryï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½BeanListHandler
 			List<ZhangWu> list = qr.query(sql, new BeanListHandler<>(ZhangWu.class));
 			return list;
 		}catch(SQLException ex){
 			System.out.println(ex);
-			throw new RuntimeException("²éÑ¯ËùÓÐÕËÎñÊ§°Ü");
+			throw new RuntimeException("ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
 		}
 	}
 	
